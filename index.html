@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Dilip B Ganesh | software engineer Portfolio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+   
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+
+  
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  />
+
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    :root{
+      --bg:#071024; --card:#071426; --accent:#7c3aed; --muted:#94a3b8; --glass: rgba(255,255,255,0.04);
+    }
+
+    *{box-sizing:border-box}
+    body{font-family:"Open Sans", "Montserrat", sans-serif; background:linear-gradient(180deg,#071024 0%, #071a2b 100%); color:#e6eef8; margin:0; line-height:1.5; -webkit-font-smoothing:antialiased}
+
+    /* Navbar */
+    .navbar{position:sticky; top:0; backdrop-filter:blur(8px); background:linear-gradient(90deg, rgba(8,12,20,0.75), rgba(8,12,20,0.5)); border-bottom:1px solid rgba(255,255,255,0.04); z-index:1000; padding:0.6rem 1rem}
+    .nav-inner{display:flex; justify-content:space-between; align-items:center; max-width:1100px; margin:0 auto}
+    .brand{font-weight:700; font-size:1.1rem; color:var(--accent); text-decoration:none}
+    .nav-links a{color: #cfe8ff; margin-left:1rem; text-decoration:none; padding:0.35rem 0.5rem; border-radius:8px; transition:all .18s ease}
+    .nav-links a:hover{background:rgba(124,58,237,0.12); transform:translateY(-2px)}
+
+    /* Hero */
+    .hero{position:relative; padding:4.5rem 1rem; min-height:62vh; display:flex; align-items:center; justify-content:center; text-align:center; overflow:hidden}
+    .hero-overlay{position:absolute; inset:0; background:radial-gradient(circle at 10% 20%, rgba(124,58,237,0.06), transparent 12%), linear-gradient(180deg, rgba(2,6,23,0.45), transparent 40%); pointer-events:none}
+    .hero-content{position:relative; max-width:980px; z-index:2}
+    .hero-avatar-wrapper{display:inline-block; border-radius:14px; overflow:hidden; box-shadow:0 18px 40px rgba(2,6,23,0.7); border:1px solid rgba(255,255,255,0.04); background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent); width:96px; height:96px}
+    .hero-avatar{width:96px; height:96px; object-fit:cover; display:block; border-radius:10px; border:2px solid rgba(255,255,255,0.06)}
+    .hero-name{font-family:"Montserrat",sans-serif; font-size:2.4rem; margin:.6rem 0 0.2rem; color:#fff}
+    .hero-tagline{font-weight:400; color:var(--muted); margin-bottom:1rem}
+    .hero-outdated{color:var(--muted); margin-bottom:0.6rem}
+    .hero-button{background:linear-gradient(90deg,var(--accent),#06b6d4); color:#fff; border:none; padding:0.7rem 1.2rem; border-radius:10px; cursor:pointer; box-shadow:0 8px 30px rgba(124,58,237,0.18); transition:transform .18s ease}
+    .hero-button:hover{transform:translateY(-4px)}
+
+    /* Sections and cards */
+    .section{padding:3rem 1rem}
+    .section-inner{max-width:1100px; margin:0 auto}
+    .skills-grid, .projects-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:1rem}
+    .skill-card{background:var(--glass); border:1px solid rgba(255,255,255,0.04); padding:1.1rem; border-radius:12px; transition:transform .22s ease, box-shadow .22s ease}
+    .skill-card:hover{transform:translateY(-10px); box-shadow:0 24px 60px rgba(2,6,23,0.65)}
+    .skill-icon{font-size:1.9rem; background:linear-gradient(90deg,#ffd6a5, #ffb4c6); width:56px; height:56px; display:flex; align-items:center; justify-content:center; border-radius:12px; margin-bottom:0.6rem}
+
+    .project-card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); border:1px solid rgba(255,255,255,0.04); border-radius:12px; overflow:hidden}
+    .project-image-wrapper{position:relative; height:180px; overflow:hidden}
+    .project-image-wrapper img{width:100%; height:100%; object-fit:cover; display:block; transition:transform .5s ease}
+    .project-card:hover .project-image-wrapper img{transform:scale(1.04)}
+    .project-overlay{position:absolute; bottom:10px; left:10px; background:linear-gradient(90deg, rgba(0,0,0,0.45), rgba(12,12,12,0.25)); padding:8px 10px; border-radius:8px; color:#fff}
+
+    .projects-footer, .learn-buttons{margin-top:1rem; display:flex; gap:0.6rem; flex-wrap:wrap}
+    .btn-dark{background:rgba(0,0,0,0.45); color:#fff; padding:0.55rem 0.9rem; border-radius:8px; text-decoration:none; border:1px solid rgba(255,255,255,0.04)}
+
+    /* About area improvements */
+    .about-body{display:flex; gap:1.2rem; align-items:center}
+    .about-photo{width:160px; height:160px; flex:0 0 160px; border-radius:12px; overflow:hidden; display:flex; align-items:center; justify-content:center}
+    .about-photo img{width:100%; height:100%; object-fit:cover; object-position:center center; display:block}
+    .about-text{display:flex; flex-direction:column; justify-content:center}
+
+    /* Footer & utility */
+    .footer{padding:1.2rem; text-align:center; color:var(--muted); border-top:1px solid rgba(255,255,255,0.03)}
+    .back-to-top{position:fixed; right:18px; bottom:18px; width:44px; height:44px; border-radius:10px; background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01)); border:1px solid rgba(255,255,255,0.04); color:#fff; display:none; align-items:center; justify-content:center; cursor:pointer}
+
+    
+    @media (max-width:900px){
+      .about-body{flex-direction:column; align-items:center;text-align:center}
+      .about-photo{width:110px;height:110px; flex:0 0 110px}
+      .about-photo img{width:100%;height:100%}
+    }
+    @media (max-width:700px){ .nav-links{display:none} .hero-name{font-size:1.6rem} .hero-avatar{width:72px;height:72px} .skill-icon{width:48px;height:48px} }
+
+    /* Timeline date visibility */
+    .timeline-date{
+      color: var(--text) !important;
+      font-weight: 700;
+      font-size: 0.95rem;
+      display: block;
+      margin-bottom: 6px;
+      text-transform: capitalize;
+    }
+
+    
+    .section-light {
+      background: linear-gradient(180deg, rgba(3,7,18,0.85), rgba(6,10,24,0.75)) !important;
+      color: #e6eef8 !important;
+    }
+    .section-light h2,
+    .section-light h3,
+    .section-light h4,
+    .section-light p,
+    .section-light li,
+    .section-light .about-text,
+    .section-light .project-text,
+    .section-light .paper-meta {
+      color: #e6eef8 !important;
+    }
+    .section-light a,
+    .section-light .social-links a {
+      color: #06b6d4 !important;
+    }
+    .section-light .skill-card,
+    .section-light .project-card,
+    .section-light .cert-list li {
+      background: rgba(255,255,255,0.02) !important;
+      border: 1px solid rgba(255,255,255,0.04) !important;
+      color: #e6eef8 !important;
+    }
+    .section-light .project-overlay,
+    .project-overlay {
+      background: linear-gradient(180deg, rgba(0,0,0,0.66), rgba(0,0,0,0.28)) !important;
+      color: #fff !important;
+    }
+    .learn-buttons button,
+    .btn-dark {
+      color: #fff !important;
+      background: rgba(255,255,255,0.03) !important;
+      border: 1px solid rgba(255,255,255,0.04) !important;
+    }
+  </style>
+</head>
+<body>
+
+    
+  <header class="navbar">
+    <div class="nav-inner">
+      <a href="#hero" class="brand">Dilip B Ganesh</a>
+      <nav class="nav-links">
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
+        <a href="#papers">Papers</a>
+        <a href="#certifications">Certifications</a>
+        <a href="#timeline">Timeline</a>
+        <a href="#contact">Contact</a>
+        <a href="Portfolio/Dilip_VS_Resume.pdf" target="_blank" class="nav-icon-link">
+          <i class="fa-solid fa-file-pdf"></i> Resume
+        </a>
+      </nav>
+    </div>
+  </header>
+
+    
+  <section id="hero" class="hero">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <p class="hero-outdated">
+        This portfolio was last updated in <span class="accent">2026</span>.
+      </p>
+
+      <!-- <div class="hero-avatar-wrapper">
+         
+        <img src="/Users/dilipbganesh/Downloads/WhatsApp Image 2026-01-27 at 20.30.23.jpeg" alt="Dilip profile" class="hero-avatar" />
+      </div> -->
+
+      <h1 class="hero-name">Dilip B Ganesh</h1>
+      <h2 class="hero-tagline">
+        M.S. CS @ VCU · Software Engineer Enthusiast · AI/ML Enthusiast
+      </h2>
+
+      <button class="hero-button" onclick="scrollToSection('about')">
+        Enter Portfolio
+      </button>
+    </div>
+  </section>
+
+   
+  <main>
+
+     
+    <section id="about" class="section section-light">
+      <div class="section-inner">
+        <div class="about-body">
+          <div class="about-photo">
+            <img src="/Users/dilipbganesh/Desktop/JOB/college-icon-flat-line-style-representing-education-higher-learning-academic-institutions-ideal-universities-students-368750898.webp" alt="Dilip" />
+          </div>
+          <div class="about-text">
+            <h2>Dilip Bukkambudhi Ganesh</h2>
+            <h3>M.S. Computer Science · Virginia Commonwealth University</h3>
+
+            <p>
+              I'm a graduate student in Computer Science at Virginia Commonwealth
+              University. My interests span software development, machine learning, data science, and blockchain.
+            </p>
+            <p>
+              I enjoy building end-to-end AI systems: from data preprocessing and feature
+              engineering to model training, evaluation, and deployment. Recent work includes
+              a content-based image retrieval system in MATLAB, a debt manager app
+              powered by LangGraph and Streamlit.
+            </p>
+
+            <h4>Education</h4>
+            <ul>
+              <li>
+                <strong>Virginia Commonwealth University</strong> – M.S. in Computer Science
+                
+              </li>
+              <li>
+                Coursework: Cryptocurrency and blockchain, Human-AI interaction, Introduction to data science, Knowledge Discovery & Data Mining,
+                Software Engineering for AI-enabled Systems,
+                Image Analysis, Machine Learning.
+              </li>
+            </ul>
+
+            <div class="social-links">
+              <a href="https://github.com/Dilip" target="_blank">GitHub</a>
+              <a href="https://www.linkedin.com/in/Dilip" target="_blank">LinkedIn</a>
+              <a href="mailto:YOUR_EMAIL@domain.com">Email</a>
+            </div>
+          </div>
+        </div>
+
+         
+        <div class="learn-more">
+          <h3>Learn more about my:</h3>
+          <div class="learn-buttons">
+            <button onclick="scrollToSection('skills')">Skills</button>
+            <button onclick="scrollToSection('projects')">Projects</button>
+            <button onclick="scrollToSection('papers')">Papers</button>
+            <button onclick="scrollToSection('certifications')">Certifications</button>
+            <button onclick="scrollToSection('timeline')">Work Experience</button>
+            <a href="Portfolio/Dilip_VS_Resume.pdf" target="_blank" class="btn-dark">
+              <i class="fa-solid fa-file-pdf"></i> Resume
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+     
+    <section id="skills" class="section section-blue">
+      <div class="section-inner">
+        <h2>Skills</h2>
+        <p>Below are some of my skills, and I'm always learning more.</p>
+        <p class="muted"></p>
+
+        <div class="skills-grid">
+          <div class="skill-card">
+            <div class="skill-icon">🧠</div>
+            <h3>Machine & Deep Learning</h3>
+            <p>
+              Practical experience with scikit-learn, PyTorch, and TensorFlow on classification,
+              regression, and representation learning tasks.
+            </p>
+          </div>
+
+          <div class="skill-card">
+            <div class="skill-icon">🖼️</div>
+            <h3> Image Analysis</h3>
+            <p>
+              MATLAB, OpenCV, and feature engineering (filters, histograms, segmentation) applied
+              to content-based image retrieval and other vision problems.
+            </p>
+          </div>
+
+          <div class="skill-card">
+            <div class="skill-icon">💬</div>
+            <h3>Cryptocurrency and blockchain</h3>
+            <p>
+              Understanding of blockchain technology, smart contracts, and decentralized applications .
+            </p>
+          </div>
+
+          <div class="skill-card">
+            <div class="skill-icon">📊</div>
+            <h3>Data & Analytics</h3>
+            <p>
+              Good knowledge in  Python, Pandas, NumPy, SQL; 
+            </p>
+          </div>
+
+          <div class="skill-card">
+            <div class="skill-icon">🌐</div>
+            <h3>AI Applications</h3>
+            <p>
+              Streamlit, LangChain/LangGraph, REST APIs; building human-in-the-loop tools like
+              debt management systems .
+            </p>
+          </div>
+
+          <!-- <div class="skill-card">
+            <div class="skill-icon">⚛️</div>
+            <h3></h3>
+            <p>
+               -->
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+     
+    <section id="projects" class="section section-light">
+      <div class="section-inner">
+        <h2>Projects</h2>
+        <p>Some of the projects I've worked on recently.</p>
+
+        <div class="projects-grid">
+           
+          <article class="project-card">
+            <div class="project-image-wrapper">
+              <img src="/Users/dilipbganesh/Desktop/JOB/Digital-Image-Processing-Using-Matlab-1-300x214.webp" alt="CBIR project" />
+              <div class="project-overlay">
+                <h3>Content-Based Image Retrieval</h3>
+                <p>MATLAB · Image Features · Similarity Search</p>
+              </div>
+            </div>
+            <p class="project-text">
+              Developed a content-based image retrieval system using MATLAB, implementing feature
+              extraction techniques like color histograms, texture analysis, and edge detection to
+              enable efficient image similarity searches.
+            </p>
+          </article>
+
+           
+          <article class="project-card">
+            <div class="project-image-wrapper">
+              <img src="/Users/dilipbganesh/Desktop/JOB/debt-free-debt-free-just-ahead-road-sign-138931164.webp" alt="Hotel Explorer" />
+              <div class="project-overlay">
+                <h3>Debt manager + AI Summarizer</h3>
+                <p>Python · LangGraph · Streamlit</p>
+              </div>
+            </div>
+            <p class="project-text">
+              Developed a debt management tool that summarizes user financial data and provides
+              insights using AI-driven analysis and visualization.
+            </p>
+          </article>
+
+           
+          <article class="project-card">
+            <div class="project-image-wrapper">
+              <img src="/Users/dilipbganesh/Desktop/JOB/360_F_191163137_44F20T2A4XVrDBGw7nAs22eAZhXXLxDG.webp" alt="QAOA" />
+              <div class="project-overlay">
+                <h3>Amusement park management system</h3>
+                <p></p>
+              </div>
+            </div>
+            <p class="project-text">
+              Developed an amusement park management system that optimizes ride allocation,
+              ticketing, and customer experience .
+            </p>
+          </article>
+        </div>
+
+        <div class="projects-footer">
+          <a href="https://github.com/Dilipvcu" target="_blank" class="btn-dark">
+            <i class="fa-brands fa-github"></i> Visit my GitHub
+          </a>
+        </div>
+      </div>
+    </section>
+
+     
+    <section id="papers" class="section section-blue">
+      <div class="section-inner">
+        <h2>Papers & Reports</h2>
+        <p>Course projects and research-style reports.</p>
+
+        <div class="papers-list">
+          <div class="paper-item">
+            <h3>
+              Prototype: “Image-Based Classification for Skin Lesion using Deep Learning”
+            </h3>
+            <p class="paper-meta">
+               Image Analysis · 2025 · VCU
+            </p>
+          </div>
+
+          <div class="paper-item">
+            <h3>
+              Prototype: “Omniledger: A Decentralized Framework for Cross-Chain Transactions”
+            </h3>
+            <p class="paper-meta">
+              Cryptocurrency and blockchain · 2025 · VCU
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+     
+    <section id="certifications" class="section section-light">
+      <div class="section-inner">
+        <h2>Certifications</h2>
+        <p>Selected online courses and certifications.</p>
+
+        <ul class="cert-list">
+           
+          <li>
+            <a href="Portfolio/coursera-ml-specialization.pdf" target="_blank">
+              Udemy – MERN Stack
+            </a>
+          </li>
+          <li>
+            <a href="Portfolio/deeplearning-ai-nlp.pdf" target="_blank">
+              Freecodecamp – How AI is Changing the Way We Code
+            </a>
+          </li>
+          <!-- <li>
+            <a href="Portfolio/intro-to-quantum-computing.pdf" target="_blank">
+               – 
+            </a>
+          </li> -->
+        </ul>
+        <!-- <p class="cert-note">
+          (The PDFs above live in the <code>Portfolio/</code> folder of this repository. Rename
+          or add more items as needed.)
+        </p> -->
+      </div>
+    </section>
+
+     
+    <section id="timeline" class="section section-light">
+      <div class="section-inner">
+        <h2>Timeline</h2>
+        <p>A short summary of my academic and professional journey.</p>
+
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <div class="timeline-date">  Jan 2025 – Present</div>
+              <h3>Graduate Student, VCU – Richmond, VA</h3>
+              <p>
+                Pursuing M.S. in Computer Science.
+                Working on projects in AI-enabled systems, image analysis, and  data science.
+              </p>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <div class="timeline-date">. March 2024 – August 2024</div>
+              <h3>Web development intern – Patil clinic, Bengaluru</h3>
+              <p>
+                Developed and maintained the clinic's website, improving user experience and
+                accessibility. Collaborated with healthcare professionals to implement features
+                that enhanced patient engagement and streamlined appointment scheduling.
+              </p>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <div class="timeline-date">Jan 2023 – Jun 2023</div>
+              <h3>Full stack intern – Tekkybench, Bengaluru</h3>
+              <p>
+                Contributed to the development of web applications using JavaScript, React, and Node.js.
+                Collaborated with cross-functional teams to design and implement new features.
+              </p>
+            </div>
+          </div>
+
+           
+        </div>
+      </div>
+    </section>
+
+     
+    <section id="contact" class="section section-dark">
+      <div class="section-inner">
+        <h2>Contact Me</h2>
+        <p>
+          Email: <a href="mailto:YOUR_EMAIL@domain.com">bukkambudhid@vcu.edu</a>
+        </p>
+        <p>…or send a message using the form below .</p>
+
+        <div class="contact-grid">
+          <form class="contact-form">
+            <input type="text" placeholder="Your Name *" required />
+            <input type="email" placeholder="Your Email *" required />
+            <input type="text" placeholder="Your Phone" />
+            <textarea placeholder="Your Message *" required></textarea>
+            <button type="submit">Send Message</button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+   
+  <footer class="footer">
+    <p>© Dilip B Ganesh 2025</p>
+    <div class="footer-links">
+      <a href="https://github.com/Dilipvcu" target="_blank">GitHub</a>
+      <a href="https://www.linkedin.com/in/Dilipvs" target="_blank">LinkedIn</a>
+    </div>
+  </footer>
+
+  <button id="backToTop" class="back-to-top" aria-label="Back to top">▲</button>
+
+  <script>
+    // Small UI helpers: smooth scrolling and back-to-top visibility
+    function scrollToSection(id){
+      const el = document.getElementById(id);
+      if(el) el.scrollIntoView({behavior:'smooth', block:'start'});
+    }
+
+    document.addEventListener('scroll', () => {
+      const btn = document.getElementById('backToTop');
+      if(!btn) return;
+      if(window.scrollY > 300) btn.style.display = 'flex'; else btn.style.display = 'none';
+    });
+
+    document.getElementById('backToTop')?.addEventListener('click', () => scrollToSection('hero'));
+
+    // Contact form demo handling
+    document.querySelector('.contact-form')?.addEventListener('submit', (e) => {
+      e.preventDefault();
+      alert('Thanks! This is a demo form. For job inquiries, please email YOUR_EMAIL@domain.com');
+    });
+  </script>
+  <script src="script.js"></script>
+</body>
+</html>
